@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriApp Mockup - Layout Responsivo</title>
+    <style>
+        /* Variáveis CSS para cores */
+        :root {
+            --primary-blue: #3498db; /* Azul principal */
+            --dark-blue: #2c3e50;    /* Azul escuro para textos/elementos */
+            --light-blue: #ecf0f1;   /* Azul muito claro para fundo/bordas */
+            --white: #ffffff;
+            --text-color: #333;
+            --light-grey: #f4f4f4;
+            --border-color: #ddd;
+        }
+
+        /* Estilos Gerais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-grey);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: var(--white);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: var(--dark-blue);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: #2980b9; /* Tom de azul um pouco mais escuro */
+        }
+
+        .content {
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .screen {
+            display: none; /* Esconde todas as telas por padrão */
+            padding: 20px;
+        }
+
+        .screen.active {
+            display: block; /* Mostra a tela ativa */
+        }
+
+        h2 {
+            color: var(--dark-blue);
+            border-bottom: 2px solid var(--light-blue);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para Formulários */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="number"],
+        .form-group textarea {
+            width: calc(100% - 22px); /* Ajusta para padding e border */
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .btn {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .card {
+            background-color: var(--light-grey);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .chart-placeholder {
+            background-color: var(--light-blue);
+            border: 1px dashed var(--primary-blue);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Mobile View (para simular o app mobile) */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            header {
+                padding: 15px;
+                font-size: 1.5em;
+            }
+            nav button {
+                display: block;
+                width: calc(100% - 10px);
+            }
+            .content {
+                padding: 15px;
+            }
+            .screen {
+                padding: 15px 0; /* Menos padding lateral para tela cheia */
+            }
+        }
+
+        /* Estilos para o Mock de Layout */
+        #app-mock, #web-mock {
+            display: none; /* Esconde os blocos principais */
+        }
+        #app-mock.active, #web-mock.active {
+            display: block;
+        }
+
+        .top-bar {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-bar .title {
+            flex-grow: 1;
+        }
+        .top-bar button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .top-bar button:hover {
+            color: var(--primary-blue);
+        }
+
+        .mobile-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--dark-blue);
+            padding: 10px 0;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        .mobile-nav button {
+            flex: 1;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 0;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 0; /* Remove border-radius */
+        }
+        .mobile-nav button.active, .mobile-nav button:hover {
+            background-color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>NutriApp</header>
+
+        <nav id="main-nav">
+            <button onclick="showMock('app')">Visualizar App Mobile (Paciente)</button>
+            <button onclick="showMock('web')">Visualizar Portal Web (Nutricionista)</button>
+        </nav>
+
+        <div id="app-mock" class="active"> <div class="top-bar">
+                <button onclick="goBack('app')">&larr; Voltar</button>
+                <span class="title" id="app-screen-title">Login do Paciente</span>
+                <button onclick="appLogout()">Sair</button>
+            </div>
+            <div class="content">
+                <div id="app-login-screen" class="screen active">
+                    <h2>Login do Paciente</h2>
+                    <div class="form-group">
+                        <label for="app-email">E-mail:</label>
+                        <input type="email" id="app-email" placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-password">Senha:</label>
+                        <input type="password" id="app-password" placeholder="********">
+                    </div>
+                    <button class="btn" onclick="appLogin()">Entrar</button>
+                    <p style="text-align: center; margin-top: 20px;">
+                        <a href="#" onclick="alert('Funcionalidade de recuperação de senha.')">Esqueceu a senha?</a>
+                    </p>
+                </div>
+
+                <div id="app-home-screen" class="screen">
+                    <h2>Olá, Maria!</h2>
+                    <p>Seu acompanhamento ativo:</p>
+                    <div class="card">
+                        <h3>Período Atual</h3>
+                        <p><strong>Início:</strong> 01/06/2025</p>
+                        <p><strong>Fim:</strong> 31/08/2025</p>
+                        <p><strong>Refeições Livres (Total/Usadas/Restantes):</strong> <span id="app-free-meals-count">4/1/3</span></p>
+                    </div>
+                    <button class="btn" onclick="showAppScreen('app-daily-fill-screen')">Preencher Registro Diário</button>
+                    <button class="btn" onclick="showAppScreen('app-history-screen')">Ver Histórico</button>
+                    <p style="margin-top: 20px;">
+                        <input type="checkbox" id="app-notifications-toggle" checked>
+                        <label for="app-notifications-toggle">Receber Notificações Diárias</label>
+                    </p>
+                </div>
+
+                <div id="app-daily-fill-screen" class="screen">
+                    <h2>Registro Diário</h2>
+                    <div class="form-group">
+                        <label for="daily-date">Data:</label>
+                        <input type="date" id="daily-date" value="2025-06-06">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="check-diet">
+                        <label for="check-diet">Aderi à dieta hoje.</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="check-hydration">
+                        <label for="check-hydration">Bebi água o suficiente (ex: 2L).</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="check-exercise">
+                        <label for="check-exercise">Realizei meus exercícios.</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="daily-observations">Observações:</label>
+                        <textarea id="daily-observations" placeholder="Ex: Me senti um pouco cansada hoje."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="daily-meals-outside">Refeições fora da dieta (quantidade e frequência):</label>
+                        <textarea id="daily-meals-outside" placeholder="Ex: 2 fatias de pizza no jantar."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="daily-difficulties">Dificuldades enfrentadas:</label>
+                        <textarea id="daily-difficulties" placeholder="Ex: Dificuldade em resistir a doces."></textarea>
+                    </div>
+                    <button class="btn" onclick="saveDailyRecord()">Salvar Registro</button>
+                    <button class="btn" onclick="recordFreeMeal()">Registrar Refeição Livre</button>
+                </div>
+
+                <div id="app-history-screen" class="screen">
+                    <h2>Seu Histórico</h2>
+                    <div id="history-list">
+                        <div class="card">
+                            <h3>Registro de 05/06/2025</h3>
+                            <p><strong>Dieta:</strong> Sim | <strong>Hidratação:</strong> Sim | <strong>Exercício:</strong> Não</p>
+                            <p><strong>Obs:</strong> Me senti bem hoje, mas esqueci de fazer exercícios.</p>
+                            <p><strong>Refeições Fora:</strong> Nenhuma.</p>
+                            <p><strong>Dificuldades:</strong> Nenhuma.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Registro de 04/06/2025</h3>
+                            <p><strong>Dieta:</strong> Sim | <strong>Hidratação:</strong> Sim | <strong>Exercício:</strong> Sim</p>
+                            <p><strong>Obs:</strong> Dia produtivo.</p>
+                            <p><strong>Refeições Fora:</strong> 1 refeição livre: hambúrguer.</p>
+                            <p><strong>Dificuldades:</strong> Nenhuma.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-nav">
+                <button id="nav-home" onclick="showAppScreen('app-home-screen')">Home</button>
+                <button id="nav-daily" onclick="showAppScreen('app-daily-fill-screen')">Diário</button>
+                <button id="nav-history" onclick="showAppScreen('app-history-screen')">Histórico</button>
+            </div>
+        </div>
+
+        <div id="web-mock">
+            <div class="top-bar">
+                <span class="title" id="web-screen-title">Login do Nutricionista</span>
+                <button onclick="webLogout()">Sair</button>
+            </div>
+            <div class="content">
+                <div id="web-login-screen" class="screen active">
+                    <h2>Login do Nutricionista</h2>
+                    <div class="form-group">
+                        <label for="web-email">E-mail:</label>
+                        <input type="email" id="web-email" placeholder="nutri@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="web-password">Senha:</label>
+                        <input type="password" id="web-password" placeholder="********">
+                    </div>
+                    <button class="btn" onclick="webLogin()">Entrar</button>
+                </div>
+
+                <div id="web-dashboard-screen" class="screen">
+                    <h2>Dashboard</h2>
+                    <p>Bem-vindo, Dr. Flávio!</p>
+                    <div class="card">
+                        <h3>Resumo Rápido</h3>
+                        <p><strong>Pacientes Ativos:</strong> 15</p>
+                        <p><strong>Registros Hoje:</strong> 10</p>
+                        <p><strong>Aguardando Ação:</strong> 2</p>
+                    </div>
+                    <button class="btn" onclick="showWebScreen('web-patient-list-screen')">Gerenciar Pacientes</button>
+                </div>
+
+                <div id="web-patient-list-screen" class="screen">
+                    <h2>Meus Pacientes</h2>
+                    <button class="btn" onclick="webAddPatient()">+ Adicionar Novo Paciente</button>
+                    <div id="patient-list">
+                        <div class="card">
+                            <h3>Maria Paciente</h3>
+                            <p>Email: maria.paciente@email.com</p>
+                            <p>Último Registro: 05/06/2025</p>
+                            <button class="btn" onclick="showWebScreen('web-patient-detail-screen')">Ver Detalhes</button>
+                            <button class="btn" style="background-color: #e74c3c;">Excluir</button>
+                        </div>
+                        <div class="card">
+                            <h3>João Teste</h3>
+                            <p>Email: joao.teste@email.com</p>
+                            <p>Último Registro: 03/06/2025</p>
+                            <button class="btn" onclick="showWebScreen('web-patient-detail-screen')">Ver Detalhes</button>
+                            <button class="btn" style="background-color: #e74c3c;">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="web-patient-detail-screen" class="screen">
+                    <h2>Detalhes do Paciente: Maria Paciente</h2>
+                    <p><strong>Email:</strong> maria.paciente@email.com</p>
+                    <p><strong>Peso Inicial:</strong> 70.5kg</p>
+                    <p><strong>Acompanhamento Ativo:</strong> 01/06/2025 - 31/08/2025</p>
+
+                    <h3>Refeições Livres</h3>
+                    <p>Total: 4 | Usadas: 1 | Restantes: 3</p>
+                    <div class="card">
+                        <p><strong>04/06/2025:</strong> 1 Refeição livre: hambúrguer.</p>
+                    </div>
+
+                    <h3>Adesão Diária</h3>
+                    <div class="chart-placeholder">Gráfico de Adesão Diária (Ex: % de checklist preenchido)</div>
+                    <div class="card">
+                        <h3>Registro de 05/06/2025</h3>
+                        <p><strong>Dieta:</strong> Sim | <strong>Hidratação:</strong> Sim | <strong>Exercício:</strong> Não</p>
+                        <p><strong>Observações:</strong> Me senti bem hoje, mas esqueci de fazer exercícios.</p>
+                        <p><strong>Refeições Fora:</strong> Nenhuma.</p>
+                        <p><strong>Dificuldades:</strong> Nenhuma.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Registro de 04/06/2025</h3>
+                        <p><strong>Dieta:</strong> Sim | <strong>Hidratação:</strong> Sim | <strong>Exercício:</strong> Sim</p>
+                        <p><strong>Observações:</strong> Dia produtivo.</p>
+                        <p><strong>Refeições Fora:</strong> 1 refeição livre: hambúrguer.</p>
+                        <p><strong>Dificuldades:</strong> Nenhuma.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis de controle de estado para simular login e navegação
+        let currentAppScreen = 'app-login-screen';
+        let currentWebScreen = 'web-login-screen';
+        let appHistory = ['app-login-screen']; // Para navegação "voltar" no app
+        let webHistory = ['web-login-screen']; // Para navegação "voltar" no web
+
+        const appMock = document.getElementById('app-mock');
+        const webMock = document.getElementById('web-mock');
+        const mainNav = document.getElementById('main-nav');
+
+        const appScreenTitle = document.getElementById('app-screen-title');
+        const webScreenTitle = document.getElementById('web-screen-title');
+
+        // Função para alternar entre o mockup do App e do Web
+        function showMock(type) {
+            if (type === 'app') {
+                appMock.classList.add('active');
+                webMock.classList.remove('active');
+                // Garante que o app sempre comece na tela de login ao alternar
+                showAppScreen('app-login-screen');
+            } else {
+                appMock.classList.remove('active');
+                webMock.classList.add('active');
+                // Garante que o web sempre comece na tela de login ao alternar
+                showWebScreen('web-login-screen');
+            }
+        }
+
+        // Funções de navegação do App Mobile
+        function showAppScreen(screenId) {
+            // Esconde a tela atual
+            document.getElementById(currentAppScreen).classList.remove('active');
+            // Mostra a nova tela
+            document.getElementById(screenId).classList.add('active');
+            currentAppScreen = screenId;
+            // Adiciona ao histórico, se não for a mesma tela ou login
+            if (appHistory[appHistory.length - 1] !== screenId && screenId !== 'app-login-screen') {
+                appHistory.push(screenId);
+            }
+            updateAppTitleAndNav(screenId);
+        }
+
+        function goBack(mockType) {
+            if (mockType === 'app') {
+                if (appHistory.length > 1) {
+                    appHistory.pop(); // Remove a tela atual
+                    const prevScreenId = appHistory[appHistory.length - 1]; // Pega a tela anterior
+                    showAppScreen(prevScreenId);
+                } else {
+                    alert('Você está na tela inicial do aplicativo.');
+                }
+            } else if (mockType === 'web') {
+                 if (webHistory.length > 1) {
+                    webHistory.pop();
+                    const prevScreenId = webHistory[webHistory.length - 1];
+                    showWebScreen(prevScreenId);
+                } else {
+                    alert('Você está na tela inicial do portal.');
+                }
+            }
+        }
+
+        function updateAppTitleAndNav(screenId) {
+            const navButtons = document.querySelectorAll('.mobile-nav button');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+
+            switch (screenId) {
+                case 'app-login-screen':
+                    appScreenTitle.textContent = 'Login do Paciente';
+                    break;
+                case 'app-home-screen':
+                    appScreenTitle.textContent = 'Meu Perfil';
+                    document.getElementById('nav-home').classList.add('active');
+                    break;
+                case 'app-daily-fill-screen':
+                    appScreenTitle.textContent = 'Preencher Diário';
+                    document.getElementById('nav-daily').classList.add('active');
+                    break;
+                case 'app-history-screen':
+                    appScreenTitle.textContent = 'Histórico';
+                    document.getElementById('nav-history').classList.add('active');
+                    break;
+                default:
+                    appScreenTitle.textContent = 'NutriApp';
+            }
+        }
+
+        function appLogin() {
+            // Simula um login bem-sucedido
+            alert('Login do Paciente realizado!');
+            appHistory = ['app-login-screen']; // Reseta histórico de navegação
+            showAppScreen('app-home-screen');
+        }
+
+        function appLogout() {
+            alert('Logout do Paciente!');
+            showAppScreen('app-login-screen');
+            appHistory = ['app-login-screen']; // Reseta histórico de navegação
+        }
+
+        function saveDailyRecord() {
+            alert('Registro diário salvo!');
+            // Aqui você pegaria os valores dos inputs e simularia o envio
+            showAppScreen('app-home-screen'); // Volta para a home após salvar
+        }
+
+        function recordFreeMeal() {
+            alert('Refeição livre registrada!');
+            // Aqui você pegaria os valores dos inputs e simularia o envio
+            showAppScreen('app-home-screen'); // Volta para a home após registrar
+        }
+
+        // Funções de navegação do Portal Web
+        function showWebScreen(screenId) {
+            document.getElementById(currentWebScreen).classList.remove('active');
+            document.getElementById(screenId).classList.add('active');
+            currentWebScreen = screenId;
+            if (webHistory[webHistory.length - 1] !== screenId && screenId !== 'web-login-screen') {
+                webHistory.push(screenId);
+            }
+            updateWebTitle(screenId);
+        }
+
+        function updateWebTitle(screenId) {
+            switch (screenId) {
+                case 'web-login-screen':
+                    webScreenTitle.textContent = 'Login do Nutricionista';
+                    break;
+                case 'web-dashboard-screen':
+                    webScreenTitle.textContent = 'Painel Administrativo';
+                    break;
+                case 'web-patient-list-screen':
+                    webScreenTitle.textContent = 'Gerenciamento de Pacientes';
+                    break;
+                case 'web-patient-detail-screen':
+                    webScreenTitle.textContent = 'Detalhes do Paciente';
+                    break;
+                default:
+                    webScreenTitle.textContent = 'NutriApp Admin';
+            }
+        }
+
+        function webLogin() {
+            // Simula um login bem-sucedido
+            alert('Login do Nutricionista realizado!');
+            webHistory = ['web-login-screen']; // Reseta histórico de navegação
+            showWebScreen('web-dashboard-screen');
+        }
+
+        function webLogout() {
+            alert('Logout do Nutricionista!');
+            showWebScreen('web-login-screen');
+            webHistory = ['web-login-screen']; // Reseta histórico de navegação
+        }
+
+        function webAddPatient() {
+            alert('Simular tela de Adicionar Novo Paciente...');
+            // Você pode adicionar uma nova tela para isso se quiser mais detalhes
+        }
+
+        // Inicializa mostrando o mockup do app
+        showMock('app');
+    </script>
+</body>
+</html>
